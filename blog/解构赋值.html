@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>解构赋值</title>
+</head>
+<body>
+    <script>
+        //ES6中的独立花括号，就是一个块级作用域
+        {
+            let a,b,rest;
+            //数组类型的解构赋值
+            // let a=1; let b=2;
+            [a,b] = [1,2];
+            console.log(a,b);
+        }    
+
+        {
+            let a,b, rest;
+            //数组解构赋值
+            [a,b,...rest] = [1,2,3,4,5,6];
+            console.log(a,b,rest);
+            //a = 1, b = 2, rest = [3,4,5,6] 
+        }
+
+        {
+            let a,b;
+            //对象解构赋值
+            ({a,b}={a:1,b:2});
+            console.log(a,b);
+        }
+
+        {
+            let a,b,c,rest;
+            //[a,b,c=3 默认值的写法]
+            //[a,b,c=3] = [1,2];
+            //console.log(a,b,c); //1,2,3
+            [a,b,c] = [1,2];
+            //a 1, b 2, c undefined
+            console.log(a,b,c);
+        }
+
+        {
+            let a = 1;
+            let b = 2;
+            //解构赋值的交换
+            [a,b] = [b,a];
+            //a 2 b 1 correct
+            console.log(a,b);
+        }
+
+        {
+            //这是一个非常重要的使用场景
+            function f(){
+                return [1,2]
+            }
+            let a,b;
+            [a,b]=f();
+            console.log(a,b); //1,2
+        }
+
+        {
+            function f(){
+                return  [1,2,3,4,5];
+            }
+            let a,b,c;
+            //index 0, index1, index2, index3 
+            [a,,,b] = f();
+            console.log(a,b);
+        }
+
+        {
+            //解构赋值有index的匹配
+            //...展开符，解构出数组
+            function f(){
+                return  [1,2,3,4,5];
+            }
+            let a,b,c;
+            //a 1 , b=[3,4,5]
+            [a,,...b] = f();
+            //a=1, b=[2,3,4,5]
+            console.log(a,b);
+        }
+
+        //对象的解构赋值
+        {
+            let o={p:42,q:true};
+            let {p,q} = o;
+            console.log(p,q); //42, true
+        }
+
+        {
+            let {a=10, b=5} = {a:3};
+            console.log(a,b); //a =3 , b=5
+        }
+
+        {
+            let metaData = {
+                title: 'abc',
+                test: [{
+                    title:'test',
+                    desc: 'description'
+                }]
+            }
+            let {title: esTitle, test:[{
+                title: cnTitle
+            }]} = metaData;
+            console.log(esTitle, cnTitle); //'abc','test'
+        }
+    </script>
+</body>
+</html>

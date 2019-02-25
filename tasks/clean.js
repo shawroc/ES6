@@ -4,4 +4,4 @@ import args from './util/args';
 
 gulp.task('clean',()=>{
     return del(['server/public','server/views'])
-})
+});

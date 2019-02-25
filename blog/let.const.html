@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>let.const</title>
+</head>
+<body>
+    <script>
+        //在ES6不需要这句话 也是强制开启这句话的。 "use strict"; 
+        function test(){
+            /* for(let i=1;i<3;i++){
+                //let产生块级作用域，可以理解为生命周期就结束了
+                console.log(i); //1,2
+            }
+            console.log(i); //ReferenceError, i is not defined */
+            let a = 1;
+            let a = 2; //Uncaught SyntaxError: Identifier 'a' has already been declared
+        }
+
+        function last(){
+            const PI = 3.1415926;
+            const k = {
+                a: 1
+            }
+            k.b=3;
+            //常量的含义就是只读的，声明的时候必须赋值。
+            //对象是引用类型，const 定义的变量名指向的是指针
+            console.log(PI, k);
+        }
+        
+        //test();
+        last();
+    </script>
+</body>
+</html>
