@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>正则扩展</title>
+</head>
+<body>
+    <script>
+        {
+            //传入字符串参数
+            let regex = new RegExp('xyz','i');
+            //传入正则表达式
+            let regex2 = new RegExp(/xyz/i);
+            // true, true
+            console.log(regex.test('xyz123'), regex2.test('xyz123')); 
+            let regex3 = new RegExp(/xyz/ig,'i');
+            //ES6新增属性，用来获取RegExp正则表达式的属性
+            console.log(regex3.flags);
+        }
+
+        {   
+            //y stand for sticky; 粘连修饰符
+            let s='bbb_bbb_b';
+            let a1=/b+/g;
+            let a2=/b+/y;
+            //g和y都是全局匹配
+            //全局匹配的不同之处在于，g修饰符是从上一次匹配的位置，继续寻找，符合匹配模式的
+            //y也是全局匹配，而 y 修饰符确保匹配必须从剩余的第一个位置开始，这也就是“粘连”的含义。
+
+            console.log('one', a1.exec(s), a2.exec(s));
+            console.log('two', a1.exec(s), a2.exec(s));
+            console.log(a1.sticky, a2.sticky); //false true
+        }
+
+        {
+            // u stand for 'unicode'
+            //'u-1' true
+            // \uD83D\uDC2A
+            console.log('u-1',/^\uD83D/.test('\uD83D\uDC2A'));
+            //'u-2' false
+            //why， u修饰符的作用就是 把 \uD83D\uDC2A 当一个字节
+            console.log('u-1',/^\uD83D/u.test('\uD83D\uDC2A'));
+
+            //{}花括号里面的unicode数字码，如果不加u修饰符是不会被识别的
+            console.log(/\u{61}/.test('a')); // false
+            console.log(/\u{61}/u.test('a')); // true
+
+            console.log(`\u{20BB7}`); //𠮷
+
+            let s = '𠮷';
+            //如果你的字符中，有大于两个字节的，一定要加上u修饰符，才能正确识别
+            //console.log('u', /^.$/.test(s)); //false
+            console.log('u', /^.$/u.test(s)); //true
+
+            console.log('test-1', /𠮷{2}/.test('𠮷𠮷')); // false,因为超过了两个字节
+
+            console.log('test-2', /𠮷{2}/u.test('𠮷𠮷')); //true,超过两个字节的字符串需要添加u修饰符
+
+            //记住 如果你处理的字符串中，有大于两个字节长度的字符，一定要加u修饰符
+            //修改一个在ES5养成的观念，就是点可以匹配任何字符
+        }
+
+        
+    </script>
+</body>
+</html>

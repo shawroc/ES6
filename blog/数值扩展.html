@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>数值扩展</title>
+</head>
+<body>
+<script>
+    {
+        //在ES6中，二进制数值都是以0b开头
+        //binary二进制
+        console.log('binary', 0b111110111); //503
+        //octonary八进制
+        console.log('octonary', 0o767); //503 7 8的二次方 6x8 + 7
+    }
+
+    {
+        //这两个api使用频率不是特别高
+        //isFinite 是否有限
+        console.log('15', Number.isFinite(15));//true
+        console.log('NaN', Number.isFinite(NaN));//false, 本身就不是数字，所以肯定是false
+        console.log('1/0',Number.isFinite(1/0)); //false
+        console.log('NaN', Number.isNaN(NaN));//true
+        console.log('0', Number.isNaN(0)); // false , it was a number
+    }
+
+    {
+        //判断是不是整数
+        //isInteger(arg) 这个函数必须接受一个数值参数，数据类型必须是数值
+        console.log('25', Number.isInteger(25)); // true
+        console.log('25.0', Number.isInteger(25.0)); //true  25 === 25.0
+        console.log('25.5', Number.isInteger(25.5)); // false
+    }
+
+    {
+        //ES6最大上限 和最大下限
+        console.log(Number.MAX_SAFE_INTEGER); //9007199254740991
+        console.log(Number.MIN_SAFE_INTEGER); //-9007199254740991
+
+        //判断是否符合数值存储范围的api, Number.isSafeInteger()
+        Number.isSafeInteger(10); //true
+        console.log('a', Number.isSafeInteger('a')); //不是数值，当然是false
+    }
+
+    {   
+        //Math.trunc()， trunc  将数字截尾取整
+        console.log('4.1', Math.trunc(4.1)); //4
+        console.log('4.9', Math.trunc(4.9)); //4
+    }
+
+    {
+        //Math.sign() sign符号的意思， 数值的前面的符号有啥
+        //返回值有四种情况  -1 0 1 NaN
+        console.log('-5', Math.sign(-5)); //负数标记为-1
+        console.log('0', Math.sign(0)); // 0sign 标记为0
+        console.log('5', Math.sign(5)); // 正数标记为1
+        console.log('6.6', Math.sign(6.6)); //1 
+        console.log('50', Math.sign('50')); //1，sign方法，会把字符串50转换为number对象
+
+        console.log('foo', Math.sign('foo')); //NaN, 字符串转换不了 所以是NaN
+    }
+
+    {
+        //立方根 cube root
+        Math.cbrt(-1)
+        console.log('-1',Math.cbrt(-1)); //-1
+        console.log('-27', Math.cbrt(-27));// -3
+        console.log('8', Math.cbrt(8)); //2
+    }
+
+    
+</script>
+</body>
+</html>

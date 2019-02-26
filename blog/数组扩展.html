@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>数组扩展</title>
+</head>
+<body>
+    <p>ES6</p>
+    <p>ES5</p>
+    <script>
+        {
+            //Array.of 就是把一组数据变量，转换成数组
+            let arr = Array.of(3,4,7,9,11);
+            console.log('arr=',arr);
+
+            let empty = Array.of();
+            //empty array
+            console.log('empty', empty);
+        }
+
+        {
+            //Array.from() 把伪数组或者一些数据集合 转换为数组
+            let p=document.querySelectorAll('p');
+            let pArr=Array.from(p);
+            pArr.forEach((item)=>{
+                console.log(item.textContent);
+            });
+
+            //Array.from(arr, function); 第二个参数function相当于map，映射遍历
+            console.log(Array.from([1,3,5], function(item){return item*2}));
+            //[2,6,10]
+        }
+
+        {
+            //填充数组的功能 Array.fill
+            console.log('fill-7', [1,'a', undefined].fill(7));
+            //[7,7,7]
+            //fill(filler, startIndexPosition, endIndexPosition)
+            console.log('fill,pos', ['a','b','c','d'].fill(7,1,3));
+            //['a',7,7,'d']
+        }
+
+        {   
+            //返回的是数组的下标 Array.keys()
+            for(let index of ['1','c','ks'].keys()){
+                console.log('key', index);
+            }
+
+            //返回的是数组的值 Array.values()
+            for(let value of ['1','c','ks'].values()){
+                console.log('value', value);
+            }
+
+            for(let [index,value] of ['1','c','ks'].entries()){
+                console.log('values', value, ' index', index);
+            }
+        }
+
+        {
+            //Array.copyWithin(startIndexPos,endIndexPos,inItem)
+            console.log([1,2,3,4,5].copyWithin(0,3,4)); //[4,2,3,4,5]
+        }
+
+        {
+            console.log([1,2,3,4,5,6].find((item)=>item>3)); //4 find it and return it， 只找符合第一个条件的item
+            console.log([1,2,3,4,5,6].findIndex((item)=>item>3)); 
+            //3,index
+        }
+
+        {
+            console.log('number', [1,2,NaN].includes(1)); //true
+            console.log('number', [1,2,NaN].includes(NaN)); // true, includes 能做到。。。
+        }
+
+
+    </script>
+</body>
+</html>
