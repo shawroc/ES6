@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Symbol用法</title>
+</head>
+<body>
+    <script>
+        {
+            //Symbol在ES5中是没有的
+            //Symbol类型值就是提供一个独一无二的值，赋的值就算一样，也永远不可能相等
+            let a1=Symbol();
+            let a2=Symbol();
+            console.log(a1===a2); //false
+            //Symbol.for()和Symbol意义都是一样，都是生成一个独一无二的值
+            //区别在于,如果Symbol.for('a3')里面的变量注册过，它就返回那个值
+            //如果没注册过，它就生成一个独一无二的值
+            let a3=Symbol.for('a3');
+            let a4=Symbol.for('a3');
+            console.log(a3===a4); //true
+        }
+
+        {
+            let a1=Symbol.for('abc');
+            let obj={
+                //Symbol(abc)
+                [a1]: '123',
+                'abc': 345,
+                'c': 456
+                //'abc':345,
+                //'c': 456,
+                //Symbol(abc):'123'
+            };
+            console.log(obj);
+
+            for(let [key, value] of Object.entries(obj)){
+                console.log('let of ', key, value);
+                //在对象里遍历不出Symbol
+                //let of abc 345
+                //let of c 456
+            }
+
+            //Object.getOwnPropertySymbols 数组的话就可以用[].forEach
+            Object.getOwnPropertySymbols(obj).forEach(function(item){
+                console.log(obj[item]);
+            });
+
+            //Reflect.ownKeys()，这个方法包含了Symbol变量作为key值的属性
+            //也包含了非Symbol变量作为key值的属性
+            //也是返回一个数组 [key, key, key]
+            //
+            Reflect.ownKeys(obj).forEach(function(item){
+                console.log('ownkey', item, obj[item]);
+                //ownkey abc 345
+                //ownkey c 456
+                //ownkey Symbol(abc) 123 
+            }); 
+            
+        }
+    </script>
+</body>
+</html>

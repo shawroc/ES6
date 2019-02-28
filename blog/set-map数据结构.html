@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>set-map数据结构</title>
+</head>
+<body>
+    <script>
+        {
+            let list = new Set();
+            //向Set数据结构增加item，需要用add方法
+            list.add(5);
+            list.add(7);
+
+            //得到Set数据结构的长度，要用size
+            console.log('size',list.size);//5
+        }
+
+        {
+            let arr = [1,2,3,4,5];
+            let list = new Set(arr);
+
+            console.log('size', list.size);//5
+        }
+
+        {
+            //Set数据结构的数据必须是唯一的
+            let list = new Set();
+            list.add(1);
+            list.add(2);
+            list.add(1); //添加重复数据类型不生效，不会报错
+            console.log('list', list);
+            //这个特性可以干什么呢？
+            //可以用来数组去重
+            //可以保证每个元素都是独一无二，不重复的
+            //但是不会数据类型转换
+            let arr = [1,2,3,1,2,3,4];
+            let list2 = new Set(arr);
+            console.log('trim', list2);
+        }
+
+        {
+            //delete clear has
+            let arr=['add','delete', 'clear', 'has'];
+            let list=new Set(arr);
+            console.log('has', list.has('add')); //has true
+            console.log('delete', list.delete('add'), list); //delete true代表删除成功了 ['delete','clear','has']
+            list.clear();
+            console.log('list', list);
+        }
+
+        {
+            let arr=['add','delete','clear','has'];
+            let list = new Set(arr);
+            console.log(list.keys())
+
+            //key和value都是一样的
+            for(let key of list.keys()) {
+                console.log('keys', key)
+            }
+
+            for(let value of list.values()){
+                console.log('value', value)
+            }
+
+            //直接用for of 语句遍历 Set数据结构也是可以的
+            for(let value of list){
+                console.log('value', value);
+            }
+
+            for(let [key,value] of list.entries()){
+                console.log('entries', key, value)
+            }
+
+            //可以直接用forEach方法
+            list.forEach(function(item){
+                console.log(item);
+            });
+        }
+
+        {
+            let weakList = new WeakSet();
+            //WeakSet和Set数据类型有什么区别呢？
+            //WeakSet的对象的话都是一个弱引用
+            //WeakSet的数据类型只能是对象
+            //不能使用clear
+            //无法通过垃圾回收
+            //不能遍历
+            let arg={};
+            weakList.add(arg);
+            //weakList.add(2); 
+            //Uncaught TypeError: Invalid value used in weak set
+            console.log('weakList', weakList);
+        }
+
+        {
+            //map
+            let map = new Map();
+            let arr = ['123'];
+            //map的特性就是可以用任意数据类型当作key
+            map.set(arr,456);
+            //获取map.get()方法获取key 映射出的value值
+            console.log('map', map, map.get(arr));
+        }
+
+        {
+            let map = new Map([['a',123],['b',456]]);
+            console.log('map', map); //Map(2) {"a" => 123, "b" => 456}
+            console.log('size',map.size); //2
+            console.log('delete', map.delete('a'), map); //true {"b" => 456}
+            console.log('clear', map.clear(), map); //clear undefined Map(0) {}
+        }
+
+        {
+            //WeakMap数据结构接受的key值也必须是对象，不能是其他的
+            //不能使用clear方法
+            //不能遍历
+            //没有size属性
+            let weakmap = new WeakMap();
+            let o={};
+            weakmap.set(o,123);
+            console.log(o);
+            console.log(weakmap.get(o))
+        }
+    </script>
+</body>
+</html>
