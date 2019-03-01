@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>类与对象</title>
+</head>
+<body>
+    <script>
+        {
+            // 类的基本定义和生成实列
+            class Parent {
+                constructor(name="Shaw"){
+                    this.name=name;
+                }
+            }
+
+            //创造实列 通过 new关键字
+            let v_parent=new Parent("Roc"); 
+            console.log(v_parent);
+        }
+
+        {
+            // 继承
+            class Parent{
+                construtor(name="Shaw"){
+                    this.name=name;
+                }
+            }
+
+            // 通过extends 实现继承
+            class Child extends Parent{
+
+            }
+
+            console.log('继承', new Child());
+
+            /* 继承 
+            Child {}
+            __proto__: Parent
+            constructor: class Child
+            __proto__: Object
+            */
+        }
+
+        {
+            //继承传递参数
+            class Parent{
+                constructor(name="Shaw"){
+                    this.name=name;
+                }
+            }
+
+            class Child extends Parent{
+                constructor(name="child"){
+                    super(name);
+                    //在定义自己属性的时候，调用this
+                    //一定要放在super之后
+                    //换句话说，如果子类的构造函数用super向父类传递了参数，
+                    //super一定是放在构造函数的第一行
+                    this.type='child';
+                }
+            }
+
+            console.log('继承', new Child()); //Child {name: "child", type: "child"}
+        }
+
+        {
+            //类中的getter和setter
+            class Parent{
+                constructor(name="Shaw"){
+                    this.name=name;
+                }
+
+                get longName(){
+                    return 'mk' + this.name;
+                }
+
+                set longName(value){
+                    this.name=value;
+                }
+            }
+
+            let v=new Parent();
+            console.log('getter', v.longName); //getter mkShaw
+            v.longName='hello';
+            console.log('setter', v.longName); //setter and getter  setter mkhello
+        }
+
+        {
+            //静态方法
+            class Parent{
+                constructor(name="Shaw"){
+                    this.name=name;
+                }
+
+                //一定要注意，加了static 关键字 这个方法就变成了静态方法
+                static tell(){
+                    console.log('tell');
+                }
+            }
+
+            //静态方法的定义和使用
+            Parent.tell();
+        }
+
+        {
+            //静态属性
+            class Parent{
+                constructor(name="Shaw"){
+                    this.name=name;
+                }
+
+                static tell(){
+                    console.log('tell');
+                }
+                //静态属性 没有关键字
+            }
+
+            //静态属性的设置方法，直接在类定义完成后，直接通过.关键词定义
+            Parent.type="test";
+            console.log('静态属性', Parent.type);
+        }
+
+        {
+            
+        }
+    </script>
+</body>
+</html>
